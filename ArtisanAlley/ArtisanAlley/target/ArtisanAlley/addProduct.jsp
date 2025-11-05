@@ -11,19 +11,20 @@
 <html>
 <head>
     <title>Add Product - Artisan Alley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .nav { background-color: #444; padding: 0.5rem; }
-        .nav a { color: white; margin: 0 1rem; text-decoration: none; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #F5F5DC; color: #8B4513; }
+        .header { background-color: #D2B48C; color: #8B4513; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav { background-color: #D2B48C; padding: 0.5rem; }
+        .nav a { color: #8B4513; margin: 0 1rem; text-decoration: none; }
         .container { max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
         .form-container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .form-group { margin-bottom: 1rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
         .form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
         .form-group textarea { resize: vertical; min-height: 100px; }
-        .btn { background-color: #4CAF50; color: white; padding: 12px 24px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 1rem; }
-        .btn:hover { background-color: #45a049; }
+        .btn { background-color: #A0522D; color: white; padding: 12px 24px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+        .btn:hover { background-color: #8B4513; }
         .error { color: red; margin-bottom: 1rem; }
         .image-preview { position: relative; display: inline-block; margin-top: 0.5rem; }
         .image-preview img { max-width: 200px; max-height: 200px; border-radius: 4px; }
@@ -74,6 +75,7 @@
     <div class="nav">
         <a href="sellerDashboard">My Products</a>
         <a href="addProduct.jsp">Add New Product</a>
+        <a href="profile">Profile</a>
     </div>
 
     <div class="container">
@@ -93,7 +95,7 @@
                     <textarea id="description" name="description" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="price">Price ($):</label>
+                    <label for="price">Price (₹):</label>
                     <input type="number" id="price" name="price" step="0.01" min="0" required>
                 </div>
                 <div class="form-group">

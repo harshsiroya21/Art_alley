@@ -18,11 +18,12 @@
 <html>
 <head>
     <title>Admin Dashboard - Artisan Alley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .nav { background-color: #444; padding: 0.5rem; }
-        .nav a { color: white; margin: 0 1rem; text-decoration: none; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #F5F5DC; color: #8B4513; }
+        .header { background-color: #D2B48C; color: #8B4513; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav { background-color: #D2B48C; padding: 0.5rem; }
+        .nav a { color: #8B4513; margin: 0 1rem; text-decoration: none; }
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
         .section { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         table { width: 100%; border-collapse: collapse; }
@@ -37,8 +38,10 @@
         .status.OUT_FOR_DELIVERY { background-color: #FF5722; color: white; }
         .status.COMPLETED { background-color: #4CAF50; color: white; }
         .status.CANCELED { background-color: #f44336; color: white; }
-        .btn { background-color: #4CAF50; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; display: inline-block; margin: 2px; border: 1px solid #ccc; }
-        .btn:hover { background-color: #45a049; }
+        .btn { background-color: #A0522D; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; display: inline-block; margin: 2px; border: 1px solid #ccc; }
+        .btn:hover { background-color: #8B4513; }
+        .btn-success { background-color: #4CAF50; }
+        .btn-success:hover { background-color: #45a049; }
         .btn-danger { background-color: #f44336; }
         .btn-danger:hover { background-color: #d32f2f; }
         .btn-warning { background-color: #ff9800; }
@@ -144,9 +147,9 @@
                             <td><%= product.getTitle() %></td>
                             <td><%= product.getShopName() %></td>
                             <td><%= product.getDescription() %></td>
-                            <td>$<%= product.getPrice() %></td>
+                            <td>₹<%= product.getPrice() %></td>
                             <td>
-                                <button type="button" class="btn" onclick="confirmAction('approve', <%= product.getId() %>)">Approve</button>
+                                <button type="button" class="btn btn-success" onclick="confirmAction('approve', <%= product.getId() %>)">Approve</button>
                                 <button type="button" class="btn btn-danger" onclick="confirmAction('reject', <%= product.getId() %>)">Reject</button>
                             </td>
                         </tr>
@@ -174,7 +177,7 @@
                             <td><%= product.getTitle() %></td>
                             <td><%= product.getShopName() %></td>
                             <td><%= product.getDescription() %></td>
-                            <td>$<%= product.getPrice() %></td>
+                            <td>₹<%= product.getPrice() %></td>
                             <td><span class="status <%= product.getStatus() %>"><%= product.getStatus() %></span></td>
                             <td>
                                 <button type="button" class="btn btn-danger" onclick="confirmDelete(<%= product.getId() %>)">Delete</button>
@@ -204,7 +207,7 @@
                             <td><%= order.getId() %></td>
                             <td><%= order.getCustomerName() %></td>
                             <td><%= order.getProductTitle() %></td>
-                            <td>$<%= order.getTotalPrice() %></td>
+                            <td>₹<%= order.getTotalPrice() %></td>
                             <td><span class="status <%= order.getStatus() %>"><%= order.getStatus() %></span></td>
                             <td>
                                 <form action="adminDashboard" method="post" style="display: inline;">

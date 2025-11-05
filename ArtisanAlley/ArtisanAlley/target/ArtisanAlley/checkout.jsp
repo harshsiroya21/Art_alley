@@ -28,11 +28,12 @@
 <html>
 <head>
     <title>Checkout - Artisan Alley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .nav { background-color: #444; padding: 0.5rem; }
-        .nav a { color: white; margin: 0 1rem; text-decoration: none; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #F5F5DC; color: #8B4513; }
+        .header { background-color: #D2B48C; color: #8B4513; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav { background-color: #D2B48C; padding: 0.5rem; }
+        .nav a { color: #8B4513; margin: 0 1rem; text-decoration: none; }
         .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
         .checkout-form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .form-group { margin-bottom: 1rem; }
@@ -41,8 +42,8 @@
         .order-summary { background: #f9f9f9; padding: 1rem; border-radius: 4px; margin-bottom: 2rem; }
         .order-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
         .total { font-size: 1.2rem; font-weight: bold; border-top: 1px solid #ddd; padding-top: 1rem; }
-        .btn { background-color: #4CAF50; color: white; padding: 12px 24px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 1rem; }
-        .btn:hover { background-color: #45a049; }
+        .btn { background-color: #A0522D; color: white; padding: 12px 24px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+        .btn:hover { background-color: #8B4513; }
     </style>
     <script>
         function validateForm() {
@@ -80,12 +81,12 @@
                         %>
                             <div class="order-item">
                                 <span><%= product.getTitle() %> (x<%= cartItem.getQuantity() %>)</span>
-                                <span>$<%= String.format("%.2f", product.getPrice() * cartItem.getQuantity()) %></span>
+                                <span>₹<%= String.format("%.2f", product.getPrice() * cartItem.getQuantity()) %></span>
                             </div>
                         <% } %>
                     <% } %>
                     <div class="total">
-                        <span>Total: $<%= String.format("%.2f", total) %></span>
+                        <span>Total: ₹<%= String.format("%.2f", total) %></span>
                     </div>
                 <% } else { %>
                     <p>Your cart is empty.</p>

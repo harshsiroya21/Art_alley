@@ -14,11 +14,12 @@
 <html>
 <head>
     <title>Order History - Artisan Alley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .nav { background-color: #444; padding: 0.5rem; }
-        .nav a { color: white; margin: 0 1rem; text-decoration: none; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #F5F5DC; color: #4E342E; }
+        .header { background-color: #D2B48C; color: #4E342E; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .nav { background-color: #D2B48C; padding: 0.5rem; }
+        .nav a { color: #4E342E; margin: 0 1rem; text-decoration: none; }
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
         .order-card { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 1rem; }
         .order-card h3 { margin: 0 0 0.5rem 0; }
@@ -28,7 +29,7 @@
         .status.OUT_FOR_DELIVERY { background-color: #FF5722; color: white; }
         .status.COMPLETED { background-color: #4CAF50; color: white; }
         .status.CANCELED { background-color: #f44336; color: white; }
-        .price { font-weight: bold; color: #4CAF50; }
+        .price { font-weight: bold; color: #A0522D; }
     </style>
 </head>
 <body>
@@ -50,7 +51,7 @@
             <% for (Order order : orders) { %>
                 <div class="order-card">
                     <h3>Product: <%= order.getProductTitle() %></h3>
-                    <p>Total Price: <span class="price">$<%= order.getTotalPrice() %></span></p>
+                    <p>Total Price: <span class="price">₹<%= order.getTotalPrice() %></span></p>
                     <p>Status: <span class="status <%= order.getStatus() %>"><%= order.getStatus() %></span></p>
                     <p>Order Date: <%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(order.getCreatedAt()) %></p>
                     <p>Order Time: <%= new java.text.SimpleDateFormat("HH:mm:ss").format(order.getCreatedAt()) %></p>

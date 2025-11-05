@@ -23,3 +23,23 @@
 
 ### 6. Test Image Persistence
 - [ ] Upload image, redeploy, verify image still displays
+
+## Apply Website Styling Changes
+
+### 1. Update all JSP files with new font, background, and text color
+- [x] addProduct.jsp
+- [x] index.jsp
+- [x] login.jsp
+- [x] register.jsp
+- [x] profile.jsp
+- [x] productList.jsp
+- [x] productDetails.jsp
+- [x] orderHistory.jsp
+- [x] orderConfirmation.jsp
+- [x] customerDashboard.jsp
+- [x] sellerDashboard.jsp
+- [x] editProduct.jsp
+- [x] adminDashboard.jsp
+- [x] cart.jsp
+- [x] checkout.jsp
+- [x] adminDashboard.jsp

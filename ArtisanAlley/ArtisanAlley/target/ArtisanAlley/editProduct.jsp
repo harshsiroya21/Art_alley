@@ -13,8 +13,9 @@
 <html>
 <head>
     <title>Edit Product - Artisan Alley</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #FFE6A7; color: #432818; }
         .header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
         .nav { background-color: #444; padding: 0.5rem; }
         .nav a { color: white; margin: 0 1rem; text-decoration: none; }
@@ -97,7 +98,7 @@
                     <textarea id="description" name="description" required><%= product.getDescription() %></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="price">Price ($):</label>
+                    <label for="price">Price (₹):</label>
                     <input type="number" id="price" name="price" step="0.01" min="0" value="<%= product.getPrice() %>" required>
                 </div>
                 <div class="form-group">

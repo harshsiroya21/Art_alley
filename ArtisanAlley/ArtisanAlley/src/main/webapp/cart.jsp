@@ -85,7 +85,7 @@
                 %>
                     <div class="cart-item">
                         <% if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) { %>
-                            <img src="<%= product.getImageUrl() %>" alt="<%= product.getTitle() %>">
+                            <img src="image?file=<%= product.getImageUrl() %>" alt="<%= product.getTitle() %>">
                         <% } else { %>
                             <div style="width: 100px; height: 100px; background: #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">No Image</div>
                         <% } %>

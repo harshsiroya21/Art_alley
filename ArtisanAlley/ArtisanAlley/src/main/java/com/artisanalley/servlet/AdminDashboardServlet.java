@@ -62,6 +62,27 @@ public class AdminDashboardServlet extends HttpServlet {
         } else if ("updateOrderStatus".equals(action)) {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             String status = request.getParameter("status");
+
+            // Get the order to find the product
+            Order order = orderDAO.getOrderById(orderId);
+            if (order != null) {
+                Product product = productDAO.getProductById(order.getProductId());
+                if (product != null) {
+                    if ("PROCESSING".equals(status) || "OUT_FOR_DELIVERY".equals(status)) {
+                        // Mark product as not available
+                        product.setStatus("SOLD_OUT");
+                        productDAO.updateProduct(product);
+                    } else if ("COMPLETED".equals(status)) {
+                        // Remove product completely (delete from database)
+                        productDAO.deleteProduct(product.getId());
+                    } else if ("CANCELED".equals(status)) {
+                        // Make product available again
+                        product.setStatus("ACTIVE");
+                        productDAO.updateProduct(product);
+                    }
+                }
+            }
+
             orderDAO.updateOrderStatus(orderId, status);
         } else if ("deleteProduct".equals(action)) {
             int productId = Integer.parseInt(request.getParameter("productId"));

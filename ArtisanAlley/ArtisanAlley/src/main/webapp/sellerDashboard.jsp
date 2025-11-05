@@ -84,7 +84,7 @@
                 <% for (Product product : products) { %>
                     <div class="product-card">
                         <% if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) { %>
-                            <img src="<%= product.getImageUrl() %>" alt="<%= product.getTitle() %>">
+                            <img src="image?file=<%= product.getImageUrl() %>" alt="<%= product.getTitle() %>">
                         <% } else { %>
                             <div style="width: 100%; height: 200px; background: #ddd; border-radius: 4px; display: flex; align-items: center; justify-content: center;">No Image</div>
                         <% } %>

@@ -105,7 +105,7 @@
                     <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
                     <% if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) { %>
                         <div id="image-preview" class="image-preview">
-                            <img src="<%= product.getImageUrl() %>" alt="Current Image">
+                            <img src="image?file=<%= product.getImageUrl() %>" alt="Current Image">
                             <button type="button" class="remove-image" onclick="removeImage()">×</button>
                         </div>
                     <% } else { %>

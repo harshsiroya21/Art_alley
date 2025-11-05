@@ -62,7 +62,7 @@
             <div class="product-detail">
                 <div class="product-image">
                     <% if (product.getImageUrl() != null && !product.getImageUrl().isEmpty()) { %>
-                        <img src="<%= product.getImageUrl() %>" alt="<%= product.getTitle() %>">
+                        <img src="image?file=<%= product.getImageUrl() %>" alt="<%= product.getTitle() %>">
                     <% } else { %>
                         <div style="width: 100%; height: 400px; background: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center;">No Image</div>
                     <% } %>

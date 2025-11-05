@@ -67,14 +67,14 @@ public class ProductServlet extends HttpServlet {
             Part imagePart = request.getPart("image");
             if (imagePart != null && imagePart.getSize() > 0) {
                 String fileName = imagePart.getSubmittedFileName();
-                String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+                String uploadPath = System.getProperty("user.home") + File.separator + "ArtisanAlleyUploads";
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
-                    uploadDir.mkdir();
+                    uploadDir.mkdirs();
                 }
                 String filePath = uploadPath + File.separator + fileName;
                 imagePart.write(filePath);
-                product.setImageUrl("uploads/" + fileName);
+                product.setImageUrl(fileName);
             }
 
             if (productDAO.addProduct(product)) {
@@ -96,14 +96,14 @@ public class ProductServlet extends HttpServlet {
                 Part imagePart = request.getPart("image");
                 if (imagePart != null && imagePart.getSize() > 0) {
                     String fileName = imagePart.getSubmittedFileName();
-                    String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+                    String uploadPath = System.getProperty("user.home") + File.separator + "ArtisanAlleyUploads";
                     File uploadDir = new File(uploadPath);
                     if (!uploadDir.exists()) {
-                        uploadDir.mkdir();
+                        uploadDir.mkdirs();
                     }
                     String filePath = uploadPath + File.separator + fileName;
                     imagePart.write(filePath);
-                    product.setImageUrl("uploads/" + fileName);
+                    product.setImageUrl(fileName);
                 } else {
                     // Keep existing image
                     product.setImageUrl(request.getParameter("currentImageUrl"));

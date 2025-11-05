@@ -8,6 +8,7 @@ com\artisanalley\servlet\CustomerDashboardServlet.class
 com\artisanalley\model\User.class
 com\artisanalley\model\Order.class
 com\artisanalley\dao\CartDAO.class
+com\artisanalley\servlet\ImageServlet.class
 com\artisanalley\servlet\SellerDashboardServlet.class
 com\artisanalley\servlet\LoginServlet.class
 com\artisanalley\servlet\ProductServlet.class

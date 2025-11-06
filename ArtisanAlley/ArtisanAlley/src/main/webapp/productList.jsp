@@ -17,7 +17,7 @@
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
         .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
         .product-card { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
+        .product-card img { width: 100%; height: 200px; object-fit: contain; border-radius: 4px; }
         .product-card h3 { margin: 0.5rem 0; color: #4E342E; }
         .product-card p { color: #4E342E; }
         .price { font-weight: bold; color: #4E342E; }

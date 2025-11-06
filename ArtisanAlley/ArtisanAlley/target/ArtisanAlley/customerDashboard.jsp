@@ -27,8 +27,9 @@
         .search-form button:hover { background-color: #45a049; }
         .nav { background-color: #D2B48C; padding: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
         .nav-links { display: flex; gap: 1rem; }
-        .nav-links a { color: #8B4513; text-decoration: none; font-weight: bold; padding: 0.5rem; border-radius: 4px; transition: border 0.3s; }
+        .nav-links a { color: #8B4513; text-decoration: none; font-weight: bold; padding: 0.5rem; border-radius: 4px; transition: border 0.3s; position: relative; }
         .nav-links a:hover { border: 2px solid #8B4513; }
+        .cart-badge { position: absolute; top: -10px; right: -10px; background-color: #FF0000; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; font-weight: bold; }
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; text-align: center; }
         .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
         .product-card { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
@@ -38,10 +39,10 @@
         .price { font-weight: bold; color: #4E342E; }
         .btn { background-color: #A0522D; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 0.5rem; border: 1px solid #ccc; width: 120px; height: 40px; text-align: center; box-sizing: border-box; font-weight: bold; }
         .btn:hover { background-color: #8B4513; }
-        .btn-primary { background-color: #007bff; }
-        .btn-primary:hover { background-color: #0056b3; }
-        .btn-success { background-color: #28a745; }
-        .btn-success:hover { background-color: #1e7e34; }
+        .btn-primary { background-color: #8B4513; }
+        .btn-primary:hover { background-color: #8B4513; }
+        .btn-success { background-color: #8B4513; }
+        .btn-success:hover { background-color: #8B4513; }
         .button-group { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem; }
         .footer { background-color: #D2B48C; color: #8B4513; padding: 1rem; text-align: center; margin-top: 2rem; }
         .footer a { color: #8B4513; text-decoration: none; font-weight: bold; margin: 0 1rem; }
@@ -56,6 +57,14 @@
         <div>Welcome, <%= user.getName() %> | <a href="logout" style="color: white;">Logout</a></div>
     </div>
 
+    <% String message = (String) session.getAttribute("message"); %>
+    <% if (message != null) { %>
+        <script>
+            alert("<%= message %>");
+        </script>
+        <% session.removeAttribute("message"); %>
+    <% } %>
+
     <div class="nav">
         <form class="search-form" action="customerDashboard" method="get">
             <input type="text" name="search" placeholder="Search products...">
@@ -63,7 +72,7 @@
         </form>
         <div class="nav-links">
             <a href="customerDashboard">Browse Products</a>
-            <a href="order?action=cart">Cart</a>
+            <a href="order?action=cart">Cart<% Integer cartItemCount = (Integer) request.getAttribute("cartItemCount"); if (cartItemCount != null && cartItemCount > 0) { %><span class="cart-badge"><%= cartItemCount %></span><% } %></a>
             <a href="order?action=history">Order History</a>
             <a href="profile">Profile</a>
         </div>
@@ -91,7 +100,7 @@
                                 <p><a href="customerDashboard?shop=<%= java.net.URLEncoder.encode(product.getShopName(), "UTF-8") %>" style="color: #007bff; text-decoration: none;"><strong>by <%= product.getShopName() %></strong></a></p>
                             <% } %>
                         <div class="button-group">
-                            <a href="product?action=view&id=<%= product.getId() %>" class="btn btn-primary">View Details</a>
+                            <a href="product?action=view&id=<%= product.getId() %>" class="btn btn-primary">View</a>
                             <form action="order" method="post" style="display: inline;">
                                 <input type="hidden" name="action" value="addToCart">
                                 <input type="hidden" name="productId" value="<%= product.getId() %>">
@@ -106,7 +115,7 @@
         </div>
     </div>
     <div class="footer">
-        &copy; 2025 Artisan Alley. All rights reserved. <a href="about.jsp">About Us</a> | <a href="contact.jsp">Contact</a> | <a href="privacy">Privacy Policy</a>
+        &copy; 2025 Artisan Alley. All rights reserved. <a href="about.jsp">About Us</a> | <a href="contact.jsp">Contact</a>
     </div>
 </body>
 </html>

@@ -1,12 +1,15 @@
 package com.artisanalley.servlet;
 
+import com.artisanalley.dao.ContactDAO;
 import com.artisanalley.dao.OrderDAO;
 import com.artisanalley.dao.ProductDAO;
 import com.artisanalley.dao.UserDAO;
+import com.artisanalley.model.ContactMessage;
 import com.artisanalley.model.Order;
 import com.artisanalley.model.Product;
 import com.artisanalley.model.User;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +21,7 @@ public class AdminDashboardServlet extends HttpServlet {
     private UserDAO userDAO = new UserDAO();
     private ProductDAO productDAO = new ProductDAO();
     private OrderDAO orderDAO = new OrderDAO();
+    private ContactDAO contactDAO = new ContactDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,10 +38,20 @@ public class AdminDashboardServlet extends HttpServlet {
         List<Product> allProducts = productDAO.getAllProducts();
         List<Order> orders = orderDAO.getAllOrders();
 
+        List<ContactMessage> contactMessages = null;
+        try {
+            contactMessages = contactDAO.getAllContactMessages();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle error, perhaps set to empty list
+            contactMessages = new java.util.ArrayList<>();
+        }
+
         request.setAttribute("users", users);
         request.setAttribute("pendingProducts", pendingProducts);
         request.setAttribute("allProducts", allProducts);
         request.setAttribute("orders", orders);
+        request.setAttribute("contactMessages", contactMessages);
         request.getRequestDispatcher("adminDashboard.jsp").forward(request, response);
     }
 
@@ -90,6 +104,13 @@ public class AdminDashboardServlet extends HttpServlet {
         } else if ("deleteUser".equals(action)) {
             int userId = Integer.parseInt(request.getParameter("userId"));
             userDAO.deleteUser(userId);
+        } else if ("deleteContactMessage".equals(action)) {
+            int messageId = Integer.parseInt(request.getParameter("messageId"));
+            try {
+                contactDAO.deleteContactMessage(messageId);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         response.sendRedirect("adminDashboard");

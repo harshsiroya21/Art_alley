@@ -15,6 +15,9 @@
     <style>
         body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #F5F5DC; color: #8B4513; }
         .header { background-color: #D2B48C; color: #8B4513; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo-section { display: flex; align-items: center; gap: 0.5rem; }
+        .logo-section img { height: 60px; margin: 0; }
+        .logo-section span { font-weight: bold; font-size: 1.5rem; }
         .nav { background-color: #D2B48C; padding: 0.5rem; }
         .nav a { color: #8B4513; margin: 0 1rem; text-decoration: none; }
         .container { max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
@@ -68,7 +71,10 @@
 </head>
 <body>
     <div class="header">
-        <a href="sellerDashboard" style="color: white; text-decoration: none;"><h1>Artisan Alley</h1></a>
+        <div class="logo-section">
+            <a href="sellerDashboard"><img src="logo.png" alt="Artisan Alley Logo"></a>
+            <span>Artisan Alley</span>
+        </div>
         <div>Welcome, <%= user.getName() %> | <a href="logout" style="color: white;">Logout</a></div>
     </div>
 

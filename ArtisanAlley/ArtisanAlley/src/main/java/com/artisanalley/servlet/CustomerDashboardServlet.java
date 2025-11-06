@@ -1,5 +1,6 @@
 package com.artisanalley.servlet;
 
+import com.artisanalley.dao.CartDAO;
 import com.artisanalley.dao.ProductDAO;
 import com.artisanalley.model.Product;
 import com.artisanalley.model.User;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class CustomerDashboardServlet extends HttpServlet {
     private ProductDAO productDAO = new ProductDAO();
+    private CartDAO cartDAO = new CartDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -37,6 +39,11 @@ public class CustomerDashboardServlet extends HttpServlet {
             products = productDAO.getAllProducts();
         }
         request.setAttribute("products", products);
+
+        // Get cart item count for the badge
+        int cartItemCount = cartDAO.getCartItemCount(user.getId());
+        request.setAttribute("cartItemCount", cartItemCount);
+
         request.getRequestDispatcher("customerDashboard.jsp").forward(request, response);
     }
 }

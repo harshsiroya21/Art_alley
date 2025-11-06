@@ -44,7 +44,6 @@
     <div class="footer">
         <p>&copy; 2025 Artisan Alley. All rights reserved.</p>
         <a href="contact.jsp">Contact</a>
-        <a href="privacy">Privacy Policy</a>
     </div>
 </body>
 </html>

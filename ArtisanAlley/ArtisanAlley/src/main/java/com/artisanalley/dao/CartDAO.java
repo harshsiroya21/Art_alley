@@ -101,4 +101,19 @@ public class CartDAO {
         }
         return null;
     }
+
+    public int getCartItemCount(int customerId) {
+        String sql = "SELECT SUM(quantity) AS total FROM cart WHERE customer_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, customerId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

@@ -39,7 +39,12 @@
         <div class="contact">
             <h2>Contact Us</h2>
             <p>We'd love to hear from you! Send us a message and we'll get back to you soon.</p>
-            <form action="contact" method="post">
+            <% if ("true".equals(request.getParameter("success"))) { %>
+                <div id="successMessage" style="color: green; font-weight: bold; margin-bottom: 1rem;">Message sent successfully!</div>
+            <% } else if ("true".equals(request.getParameter("error"))) { %>
+                <div id="errorMessage" style="color: red; font-weight: bold; margin-bottom: 1rem;">Failed to send message. Please try again.</div>
+            <% } %>
+            <form action="contact" method="post" id="contactForm">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
@@ -51,7 +56,6 @@
     <div class="footer">
         <p>&copy; 2025 Artisan Alley. All rights reserved.</p>
         <a href="about.jsp">About Us</a>
-        <a href="privacy">Privacy Policy</a>
     </div>
 </body>
 </html>

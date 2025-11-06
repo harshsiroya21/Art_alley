@@ -62,6 +62,15 @@ CREATE TABLE cart (
     UNIQUE KEY unique_cart_item (customer_id, product_id)
 );
 
+-- Contact messages table
+CREATE TABLE contact_messages (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Insert hardcoded admin user
 INSERT INTO users (name, email, password, role, status) VALUES
 ('Admin', 'admin@artisanalley.com', 'admin123', 'ADMIN', 'ACTIVE');

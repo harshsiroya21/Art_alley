@@ -78,6 +78,34 @@ public class OrderDAO {
         return orders;
     }
 
+    public List<Order> getOrdersBySeller(int sellerId) {
+        List<Order> orders = new ArrayList<>();
+        String sql = "SELECT o.*, p.title as product_title, u.name as customer_name FROM orders o JOIN products p ON o.product_id = p.id JOIN users u ON o.customer_id = u.id WHERE p.seller_id = ? ORDER BY o.created_at DESC";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, sellerId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getInt("id"));
+                order.setCustomerId(rs.getInt("customer_id"));
+                order.setProductId(rs.getInt("product_id"));
+                order.setQuantity(rs.getInt("quantity"));
+                order.setTotalPrice(rs.getDouble("total_price"));
+                order.setStatus(rs.getString("status"));
+                order.setDeliveryAddress(rs.getString("delivery_address"));
+                order.setPaymentMethod(rs.getString("payment_method"));
+                order.setCreatedAt(rs.getTimestamp("created_at"));
+                order.setProductTitle(rs.getString("product_title"));
+                order.setCustomerName(rs.getString("customer_name"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
         String sql = "SELECT o.*, p.title as product_title, u.name as customer_name FROM orders o JOIN products p ON o.product_id = p.id JOIN users u ON o.customer_id = u.id ORDER BY o.created_at DESC";

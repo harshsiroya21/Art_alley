@@ -3,6 +3,7 @@
 <%@ page import="com.artisanalley.model.User" %>
 <%@ page import="com.artisanalley.model.Product" %>
 <%@ page import="com.artisanalley.model.Order" %>
+<%@ page import="com.artisanalley.model.ContactMessage" %>
 <%
     User user = (User) session.getAttribute("user");
     if (user == null || !"ADMIN".equals(user.getRole())) {
@@ -13,6 +14,7 @@
     List<Product> pendingProducts = (List<Product>) request.getAttribute("pendingProducts");
     List<Product> allProducts = (List<Product>) request.getAttribute("allProducts");
     List<Order> orders = (List<Order>) request.getAttribute("orders");
+    List<ContactMessage> contactMessages = (List<ContactMessage>) request.getAttribute("contactMessages");
 %>
 <!DOCTYPE html>
 <html>
@@ -22,6 +24,9 @@
     <style>
         body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #F5F5DC; color: #8B4513; }
         .header { background-color: #D2B48C; color: #8B4513; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo-section { display: flex; align-items: center; gap: 0.5rem; }
+        .logo-section img { height: 60px; margin: 0; }
+        .logo-section span { font-weight: bold; font-size: 1.5rem; }
         .nav { background-color: #D2B48C; padding: 0.5rem; }
         .nav a { color: #8B4513; margin: 0 1rem; text-decoration: none; }
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
@@ -118,11 +123,37 @@
                 form.submit();
             }
         }
+
+        function confirmDeleteMessage(messageId) {
+            if (confirm('Are you sure you want to delete this contact message?')) {
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = 'adminDashboard';
+
+                var actionInput = document.createElement('input');
+                actionInput.type = 'hidden';
+                actionInput.name = 'action';
+                actionInput.value = 'deleteContactMessage';
+                form.appendChild(actionInput);
+
+                var messageIdInput = document.createElement('input');
+                messageIdInput.type = 'hidden';
+                messageIdInput.name = 'messageId';
+                messageIdInput.value = messageId;
+                form.appendChild(messageIdInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
     </script>
 </head>
 <body>
     <div class="header">
-        <a href="adminDashboard" style="color: white; text-decoration: none;"><h1>Artisan Alley</h1></a>
+        <div class="logo-section">
+            <a href="adminDashboard"><img src="logo.png" alt="Artisan Alley Logo"></a>
+            <span>Artisan Alley</span>
+        </div>
         <div>Welcome, <%= user.getName() %> | <a href="logout" style="color: white;">Logout</a></div>
     </div>
 
@@ -255,6 +286,34 @@
                 </table>
             <% } else { %>
                 <p>No users found.</p>
+            <% } %>
+        </div>
+
+        <div class="section">
+            <h2>Contact Messages</h2>
+            <% if (contactMessages != null && !contactMessages.isEmpty()) { %>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    <% for (ContactMessage msg : contactMessages) { %>
+                        <tr>
+                            <td><%= msg.getName() %></td>
+                            <td><%= msg.getEmail() %></td>
+                            <td><%= msg.getMessage() %></td>
+                            <td><%= msg.getCreatedAt() %></td>
+                            <td>
+                                <button type="button" class="btn btn-danger" onclick="confirmDeleteMessage(<%= msg.getId() %>)">Delete</button>
+                            </td>
+                        </tr>
+                    <% } %>
+                </table>
+            <% } else { %>
+                <p>No contact messages found.</p>
             <% } %>
         </div>
     </div>

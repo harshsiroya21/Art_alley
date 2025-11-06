@@ -39,6 +39,7 @@ public class OrderServlet extends HttpServlet {
         } else if ("cart".equals(action)) {
             List<Cart> cartItems = cartDAO.getCartByCustomer(user.getId());
             request.setAttribute("cartItems", cartItems);
+            request.setAttribute("cartItemCount", cartDAO.getCartItemCount(user.getId()));
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
     }
@@ -60,6 +61,7 @@ public class OrderServlet extends HttpServlet {
 
             Cart cart = new Cart(user.getId(), productId, 1);
             cartDAO.addToCart(cart);
+            session.setAttribute("message", "Product added to cart successfully!");
             response.sendRedirect(request.getContextPath() + "/customerDashboard");
         } else if ("placeOrder".equals(action)) {
             int productId = Integer.parseInt(request.getParameter("productId"));

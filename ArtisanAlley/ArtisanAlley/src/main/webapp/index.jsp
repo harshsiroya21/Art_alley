@@ -12,6 +12,7 @@
         .logo-section span { font-weight: bold; font-size: 1.5rem; }
         .nav { display: flex; gap: 1rem; align-items: center; }
         .nav a { color: #8B4513; text-decoration: none; font-weight: bold; }
+        .nav a:hover { border: 1px solid #8B4513; padding: 2px; }
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; text-align: center; }
         .hero { padding: 3rem 0; background-color: white; margin-bottom: 2rem; border-radius: 8px; font-weight: bold; }
         .hero h2 { font-weight: bold; }
